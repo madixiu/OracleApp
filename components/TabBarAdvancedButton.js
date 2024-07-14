@@ -6,15 +6,14 @@ import { FontAwesome as Icon } from '@expo/vector-icons';
 const FabClick = () => {
   return null;
 };
-export const TabBarAdvancedButton = ({
-  bgColor,
-}) => (
+export const TabBarAdvancedButton = ({theme}) => (
   <View
     style={styles.container}
     pointerEvents="box-none"
   >
     <TouchableOpacity
-      style={styles.button}
+      activeOpacity={0.8}
+      style={styles.button(theme)}
       onPress={() => FabClick()}
     >
       <Icon
@@ -32,15 +31,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  button: {
+  button: (theme) => ({
     top: -22.5,
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
     height: 50,
     borderRadius: 27,
-    backgroundColor: '#E94F37',
-  },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3, 
+    shadowRadius: 5,
+    borderWidth:2,
+    // borderColor: '#fff',
+    borderColor: theme.colors.primaryContainer,
+
+    backgroundColor: theme.colors.error,
+  }),
   buttonIcon: {
     fontSize: 16,
     color: '#F6F7EB'
