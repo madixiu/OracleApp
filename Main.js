@@ -1,3 +1,4 @@
+import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View,I18nManager } from 'react-native';
 // import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
