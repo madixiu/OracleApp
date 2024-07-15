@@ -1,36 +1,40 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet, Text, View,I18nManager } from 'react-native';
-// import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+import { StyleSheet, Text, View,I18nManager,TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { createBottomTabNavigator } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBarAdvancedButton } from './components/TabBarAdvancedButton';
 import Home from './pages/Home';
 import Goals from './pages/Goals';
 import Calendar from './pages/Calendar';
 import Social from './pages/Social';
+import Placeholder from './pages/Placeholder';
 import { useTheme } from 'react-native-paper';
 const Tab = createBottomTabNavigator();
-
 // Disable RTL layout
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);
 
 export default function Main() {
   const theme = useTheme()
+  const [isTabBarExpanded, setIsTabBarExpanded] = React.useState(false);
+  
+  const handleOutsidePress = () => {
+    if (isTabBarExpanded) {
+      setIsTabBarExpanded(false);
+    }
+  };
 
   return (
+    <TouchableWithoutFeedback onPressOut={handleOutsidePress}>
       <SafeAreaView style={styles.container}>
-        <BottomTabs theme={theme} />
+        <BottomTabs theme={theme} isTabBarExpanded={isTabBarExpanded} setIsTabBarExpanded={setIsTabBarExpanded}/>
       </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
-const FabComponent = () => {
-  return null;
-};
-function BottomTabs({theme}) {
 
+function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
   const screenOptions = {
     tabBarShowLabel: false,
     headerShown :true,
@@ -61,9 +65,16 @@ function BottomTabs({theme}) {
   return (
     <Tab.Navigator 
         screenOptions={screenOptions}
-        
       >
-      <Tab.Screen name="Home" component={Home} icon="home"
+      <Tab.Screen name="Home" component={Home}
+        listeners={(isFocused) => ({
+          tabPress: () => {
+            if (isFocused) {
+             if(isTabBarExpanded)
+              setIsTabBarExpanded(false);
+            }
+          }
+        })}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
@@ -74,6 +85,14 @@ function BottomTabs({theme}) {
         }}
       />
       <Tab.Screen name="Calendar" component={Calendar}
+        listeners={(isFocused) => ({
+          tabPress: () => {
+            if (isFocused) {
+            if(isTabBarExpanded)
+              setIsTabBarExpanded(false);
+            }
+          }
+        })}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
@@ -83,14 +102,22 @@ function BottomTabs({theme}) {
           ),
         }}
       />
-      <Tab.Screen name="Fab" component={FabComponent}
+      <Tab.Screen name="Placeholder" component={Placeholder}
         options={{
           tabBarButton: (props) => (
-            <TabBarAdvancedButton theme={theme} {...props} />
+            <TabBarAdvancedButton theme={theme} {...props} isExpanded={isTabBarExpanded} setIsExpanded={setIsTabBarExpanded} />
           ),
         }}
       />
       <Tab.Screen name="Goals" component={Goals}
+        listeners={(isFocused) => ({
+          tabPress: () => {
+            if (isFocused) {
+              if(isTabBarExpanded)
+              setIsTabBarExpanded(false);
+            }
+          }
+        })}
         options={{
           headerShown :false,
           tabBarIcon: ({ focused }) => (
@@ -102,6 +129,14 @@ function BottomTabs({theme}) {
         }}
       />
       <Tab.Screen name="Social" component={Social}
+        listeners={(isFocused) => ({
+          tabPress: () => {
+            if (isFocused) {
+              if(isTabBarExpanded)
+              setIsTabBarExpanded(false);
+            }
+          }
+        })}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
@@ -118,17 +153,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  tabBar: {
-    // height: 94, // Adjust the height as needed
-    // py:0,
-    // paddingBottom:0,
-    // paddingTop:0,
-    // justifyContent: 'center',
-  },
   tab: {
     justifyContent: 'center',
     alignItems:'center',
-    // flex:1,
-    // pt:0
   }
 });

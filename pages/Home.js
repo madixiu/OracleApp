@@ -1,5 +1,5 @@
-import { View,Text,StyleSheet } from'react-native';
-import { useTheme } from 'react-native-paper';
+import { View,Text,StyleSheet, Pressable ,TouchableOpacity} from'react-native';
+import { Button, useTheme} from 'react-native-paper';
 
 function Home() {
   const theme = useTheme();
@@ -7,9 +7,12 @@ function Home() {
   return ( 
     <View style={styles.container(theme)}>
       <Text>this is home</Text>
+      <Button onPress={()=> console.log("button pressed")}>OK</Button>
     </View>
    );
 }
+
+
 
 const styles = StyleSheet.create({
   container: (theme) => ({

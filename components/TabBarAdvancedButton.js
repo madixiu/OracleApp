@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View,Animated } from 'react-native';
 import { FontAwesome5 as Icon } from '@expo/vector-icons';
-
-export const TabBarAdvancedButton = ({ theme }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+import { useNavigation } from '@react-navigation/native';
+export const TabBarAdvancedButton = ({ theme , isExpanded, setIsExpanded }) => {
+  // const [isExpanded, setIsExpanded] = React.useState(false);
   const [showButtons, setShowButtons] = React.useState(false);
 
 
@@ -11,7 +11,7 @@ export const TabBarAdvancedButton = ({ theme }) => {
   const animationValue1 = React.useRef(new Animated.Value(0)).current;
   const animationValue2 = React.useRef(new Animated.Value(0)).current;
   const rotationValue = React.useRef(new Animated.Value(0)).current;
-
+  const navigation = useNavigation();
   React.useEffect(() => {
     if (isExpanded) {
       setShowButtons(true);
@@ -54,25 +54,24 @@ export const TabBarAdvancedButton = ({ theme }) => {
       });
     }
   }, [isExpanded]);
+ 
 
   //***************  BUTTON CLICK HANDLE SECTION  ***************** */
   const handleFabClick = () => {
     setIsExpanded(!isExpanded);
   };
-
+  
   const additionalFabClick1 = () => {
     console.log('Additional FAB 1 clicked');
+    setIsExpanded(false);
+    navigation.navigate('Placeholder'); // Navigate to Placeholder screen 
   };
   
   const additionalFabClick2 = () => {
     console.log('Additional FAB 2 clicked');
+    setIsExpanded(false);
+    navigation.navigate('Placeholder'); // Navigate to Placeholder screen 
   };
-  // const handleOutsideClick = () => {
-  //   console.log('handleOutsideClick');
-  //   if (isExpanded) {
-  //     setIsExpanded(false);
-  //   }
-  // };
   //***************  ******************  ***************** */
 
   //***************  ANIMATION SECTION  ***************** */
@@ -94,7 +93,7 @@ export const TabBarAdvancedButton = ({ theme }) => {
 return (
       <View
         style={styles.container}
-        pointerEvents="box-none"
+        id='fabContainer'
       >
         {showButtons && (
           <>
