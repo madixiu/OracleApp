@@ -67,6 +67,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
         screenOptions={screenOptions}
       >
       <Tab.Screen name="Home" component={Home}
+      
         listeners={(isFocused) => ({
           tabPress: () => {
             if (isFocused) {
@@ -76,6 +77,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
           }
         })}
         options={{
+          headerShown :false,
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
               <MaterialCommunityIcons name="home" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} />
