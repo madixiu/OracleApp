@@ -3,7 +3,6 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { ExpandableCalendar, CalendarProvider,AgendaList  } from 'react-native-calendars';
 import { useTheme } from 'react-native-paper';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import CustomAgenda from './CustomAgenda';
 
 // Sample agenda items
 const agendaItems = [
