@@ -99,15 +99,16 @@ function UpcomingEvents({theme}) {
         showsHorizontalScrollIndicator={false}
       />
     </View>
-    <View style={{flexDirection:'row', justifyContent:'space-between',marginHorizontal:10,paddingVertical:5}}>
+    <View style={{flexDirection:'row', justifyContent:'center',marginHorizontal:10,paddingVertical:5}}>
       <FlatList
         data={events}
         horizontal
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CustomCard title={item.title} subtitle={item.subtitle} time={item.time} date={item.date} links={null} theme={theme} />
+          <CustomCard title={item.title} subtitle={item.subtitle} time={item.time} date={item.date} theme={theme} />
 
         )}
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
       />
     </View>

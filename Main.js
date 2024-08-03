@@ -64,6 +64,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
   };
   return (
     <Tab.Navigator 
+        initialRouteName='Calendar'
         screenOptions={screenOptions}
       >
       <Tab.Screen name="Home" component={Home}
@@ -96,6 +97,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
           }
         })}
         options={{
+          headerShown :false,
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
               <MaterialCommunityIcons name="calendar" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} />
