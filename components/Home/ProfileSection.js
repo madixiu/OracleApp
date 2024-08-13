@@ -1,17 +1,18 @@
 import { View, Image,Text, StyleSheet } from "react-native";
 import profilePicture from './../../assets/home/profilePicture.jpg'
 import { IconButton, Badge } from 'react-native-paper';
-export default function ProfileSection({theme}) {
+import { TouchableOpacity } from "react-native-gesture-handler";
+export default function ProfileSection({theme,navigation}) {
   return ( 
     <View style={{flexDirection:'row',justifyContent:'space-between', alignItems:'center',marginTop:20,marginHorizontal:10}}>
-      <View style={styles.profilePictureView}>
+      <TouchableOpacity style={styles.profilePictureView} onPress={() => navigation.navigate('ProfileComponent')}>
         <Image style={styles.profilePicture(theme)} source={profilePicture} />
         <View style={{marginStart:5}}>
           <Text style={styles.greeting(theme)}>{`Good ${getTimeOfDay()},`}</Text>
           <Text style={styles.name(theme)}>Allisa</Text>
         </View>
-      </View>
-      <View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('NotificationComponent')}>
         <IconButton 
           icon="bell" 
           size={24} 
@@ -25,7 +26,7 @@ export default function ProfileSection({theme}) {
         >
           2
         </Badge>
-      </View>
+      </TouchableOpacity>
     </View>
    );
 }

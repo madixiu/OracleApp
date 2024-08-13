@@ -64,18 +64,27 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
   };
   return (
     <Tab.Navigator 
-        initialRouteName='Calendar'
+        initialRouteName='Home'
         screenOptions={screenOptions}
       >
       <Tab.Screen name="Home" component={Home}
       
-        listeners={(isFocused) => ({
-          tabPress: () => {
-            if (isFocused) {
+        listeners={({navigation, route}) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            if (navigation.isFocused()) {
              if(isTabBarExpanded)
               setIsTabBarExpanded(false);
+            } else {
+              navigation.navigate('Home', {
+                screen: 'HomeComponent',
+                // params: {
+                //   screen: 'Home',
+                // },
+              });
+            
             }
-          }
+          } 
         })}
         options={{
           headerShown :false,

@@ -1,139 +1,72 @@
-import { View,StyleSheet,FlatList, Pressable} from'react-native';
-import { Text,Button, Card, useTheme} from 'react-native-paper';
-import CustomButton from '../components/Home/CustomButton';
-import CustomCard from '../components/Home/CustomCard';
-import ProfileSection from '../components/Home/ProfileSection';
-import SearchBar from '../components/Home/SearchBar';
-function Home() {
-  const theme = useTheme();
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeComponent from '../components/Home/HomeComponent';
+// import ProfileComponent from '../components/Home/ProfileComponent';
+import ProfileRouter from '../components/Home/ProfileRouter';
+import NotificationComponent from '../components/Home/NotificationComponent';
+import ProfileComponent from '../components/Home/ProfileComponent';
+import Language from '../components/Home/Pages/Language';
+import Theme from '../components/Home/Pages/Theme';
+const Stack = createStackNavigator();
 
+function Home() {
   return ( 
-    <View style={styles.container(theme)}>
-      <ProfileSection theme={theme}/>
-      <SearchBar /> 
-      <UpcomingEvents theme={theme}/>
-    </View>
+    <Stack.Navigator 
+      initialRouteName='HomeComponent'
+      detachInactiveScreens={true}
+      screenOptions={{
+        
+        // headerShown:false, 
+        // headerTitleAlign:'center'
+        // headerTitle: (props) => <LogoTitle {...props} />,
+        // headerShadowVisible:false,
+        // headerShown:false,
+        // headerRight: () => (props) => <LogoTitle {...props} />,
+          
+      //  headerLeft: () => (
+      //     <Text>Button</Text>
+      // ),
+      }}>
+
+      <Stack.Screen name="HomeComponent" component={HomeComponent} 
+        options={{
+          headerShown:false,
+        }}
+      // options={{
+      //   headerTitle: (props) => <LogoTitle {...props} />,
+      //   headerLeft: () => (
+      //     <Image
+      //     source={require("../assets/logo.png")}
+      //     style={{ width: 32,height: 32,marginLeft:8}}
+      //     />
+      //   ),
+   
+      // }}
+      
+      />
+      <Stack.Screen name="ProfileComponent" component={ProfileComponent}
+        options={{
+          headerTitle: "Settings",
+        }}
+      />
+      <Stack.Screen name="Theme" component={Theme}
+        options={{
+          headerTitle: "Themes",
+        }}
+      />
+      <Stack.Screen name="Language" component={Language}
+        options={{
+          headerTitle: "Language",
+        }}
+      />
+      <Stack.Screen name="NotificationComponent" component={NotificationComponent}
+        options={{
+          headerTitle: "Notifications",
+        }}
+      />
+    </Stack.Navigator>
+
    );
 }
 
-
-const buttonList = [
-  {
-    id: 1,
-    title: 'Today',
-  },
-  {
-    id: 2,
-    title: 'This Week',
-  },
-  {
-    id: 3,
-    title: 'Next Week',
-  },
-  {
-    id: 4,
-    title: 'This Month',
-  },
-  {
-    id: 5,
-    title: 'All',
-  },
-];
-
-const events = [
-  {
-    id: 1,
-    title: "Purrweb Daily",
-    date: "2024-07-15", // Example: Today
-    time: "10:00 AM",
-    subtitle: "Daily stand-up meeting"
-  },
-  {
-    id: 2,
-    title: "Design Review",
-    date: "2024-07-16", // Example: Tomorrow
-    time: "2:00 PM - 3:00 PM",
-    subtitle: "Review new design proposals"
-  },
-  {
-    id: 3,
-    title: "Sprint Planning",
-    date: "2024-07-20", // Example: Later this week
-    time: "11:00 AM - 12:30 PM",
-    subtitle: "Plan tasks for the next sprint"
-  },
-  {
-    id: 4,
-    title: "Client Meeting",
-    date: "2024-07-25", // Example: Later this month
-    time: "4:00 PM",
-    subtitle: "Discuss project updates with the client"
-  },
-  {
-    id: 5,
-    title: "Team Building Activity",
-    date: "2024-07-30", // Example: Next week
-    time: "5:00 PM - 6:30 PM",
-    subtitle: "Fun activities to improve team cohesion"
-  }
-];
-
-
-function UpcomingEvents({theme}) {
-  return(
-  <View>
-    <View style={{marginVertical:10,marginHorizontal:15}}>
-      <Text variant="headlineMedium" style={styles.title(theme)}>Upcoming Events</Text>
-    </View>
-    <View style={{flexDirection:'row', justifyContent:'space-between',marginHorizontal:10}}>
-      <FlatList
-        data={buttonList}
-        horizontal
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-        <CustomButton 
-          title={item.title}
-          onPress={() => console.log(item.title)}
-        />
-        )}
-        showsHorizontalScrollIndicator={false}
-      />
-    </View>
-    <View style={{flexDirection:'row', justifyContent:'center',marginHorizontal:10,paddingVertical:5}}>
-      <FlatList
-        data={events}
-        horizontal
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <CustomCard title={item.title} subtitle={item.subtitle} time={item.time} date={item.date} theme={theme} />
-
-        )}
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
-    </View>
-  </View>
-
-  )
-}
-
-const styles = StyleSheet.create({
-  container: (theme) => ({
-    flex:1,
-    backgroundColor: theme.colors.background
-  }),
-  title:(theme) => ( {
-    fontWeight: 'bold',
-    color: theme.colors.onBackground,
-    // color: 'red'
-  }),
-  // button: {
-  //   marginHorizontal: 5,
-  //   borderRadius:10,
-  // },
-  // buttonLabel: {
-  //   fontSize: 13,
-  //   fontWeight: 'bold',
-  // },
-});
 export default Home;
