@@ -12,11 +12,11 @@ export default function ProfileSection({theme,navigation}) {
           <Text style={styles.name(theme)}>Allisa</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('NotificationComponent')}>
+      <View>
         <IconButton 
           icon="bell" 
           size={24} 
-          onPress={() => console.log('Pressed')} 
+          onPress={() => navigation.navigate('NotificationComponent')}
           iconColor={theme.colors.primary}
         />
         <Badge 
@@ -26,7 +26,7 @@ export default function ProfileSection({theme,navigation}) {
         >
           2
         </Badge>
-      </TouchableOpacity>
+      </View>
     </View>
    );
 }

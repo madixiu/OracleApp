@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet,Text,Button } from 'react-native';
-
-const Theme = () => {
+import { View, TouchableOpacity, StyleSheet,Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const Theme = ({updateTheme}) => {
   // State to hold the index of the selected box
   const [selectedBox, setSelectedBox] = useState(0);
 
+  React.useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('themeColor');
+      if (value !== null) {
+        const index = colors.findIndex(c => c.name === value);
+        setSelectedBox(index);
+        
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
   // Array of colors for the boxes
   const colors = [{name:'Dark Lavender',color:'#7845AC'},
   // {name:'Portland Orange',color:'#FF5A36'},
@@ -15,13 +31,25 @@ const Theme = () => {
     setSelectedBox(index);
   };
 
+  const handleApply = () => {
+    storeData(colors[selectedBox].name)
+    updateTheme();
+     
+  }
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('themeColor', value);
+    } catch (e) {
+      // saving error
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.palleteContainer} >
+      <View style={styles.palleteContainer}>
         {colors.map((color, index) => (
           <View style={{flex:1,alignItems:'center'}} key={index}>
           <TouchableOpacity
-            // key={index}
             style={[
               styles.box,
               { backgroundColor: color.color },
@@ -34,7 +62,7 @@ const Theme = () => {
         ))}
       </View>
       <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-        <TouchableOpacity activeOpacity={0.6} style={[styles.applyButton,{backgroundColor: colors[selectedBox].color}]}>
+        <TouchableOpacity activeOpacity={0.6} style={[styles.applyButton,{backgroundColor: colors[selectedBox].color}]} onPress={() => handleApply()}>
           <Text style={{fontSize:16,color:'white',fontWeight:700}}>Apply</Text>
         </TouchableOpacity>
       

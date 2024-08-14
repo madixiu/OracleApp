@@ -15,10 +15,9 @@ const Tab = createBottomTabNavigator();
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);
 
-export default function Main() {
+export default function Main({updateTheme}) {
   const theme = useTheme()
   const [isTabBarExpanded, setIsTabBarExpanded] = React.useState(false);
-  
   const handleOutsidePress = () => {
     if (isTabBarExpanded) {
       setIsTabBarExpanded(false);
@@ -28,13 +27,13 @@ export default function Main() {
   return (
     <TouchableWithoutFeedback onPressOut={handleOutsidePress}>
       <SafeAreaView style={styles.container}>
-        <BottomTabs theme={theme} isTabBarExpanded={isTabBarExpanded} setIsTabBarExpanded={setIsTabBarExpanded}/>
+        <BottomTabs theme={theme} isTabBarExpanded={isTabBarExpanded} setIsTabBarExpanded={setIsTabBarExpanded} updateTheme={updateTheme}/>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 }
 
-function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
+function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) {
   const screenOptions = {
     tabBarShowLabel: false,
     headerShown :true,
@@ -67,9 +66,9 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
         initialRouteName='Home'
         screenOptions={screenOptions}
       >
-      <Tab.Screen name="Home" component={Home}
-      
-        listeners={({navigation, route}) => ({
+      <Tab.Screen name="Home" 
+      // component={Home}
+      isteners={({navigation, route}) => ({
           tabPress: (e) => {
             e.preventDefault();
             if (navigation.isFocused()) {
@@ -95,7 +94,10 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded}) {
             </View>
           ),
         }}
-      />
+      >
+         {(props) => <Home {...props} updateTheme={updateTheme} />}      
+
+      </Tab.Screen>
       <Tab.Screen name="Calendar" component={Calendar}
         listeners={(isFocused) => ({
           tabPress: () => {

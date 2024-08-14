@@ -1,15 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeComponent from '../components/Home/HomeComponent';
-// import ProfileComponent from '../components/Home/ProfileComponent';
-import ProfileRouter from '../components/Home/ProfileRouter';
 import NotificationComponent from '../components/Home/NotificationComponent';
 import ProfileComponent from '../components/Home/ProfileComponent';
 import Language from '../components/Home/Pages/Language';
 import Theme from '../components/Home/Pages/Theme';
 const Stack = createStackNavigator();
 
-function Home() {
+function Home({ updateTheme }) {
+
   return ( 
     <Stack.Navigator 
       initialRouteName='HomeComponent'
@@ -49,11 +48,17 @@ function Home() {
           headerTitle: "Settings",
         }}
       />
-      <Stack.Screen name="Theme" component={Theme}
+      <Stack.Screen name="Theme" 
+      // component={Theme}
+
         options={{
           headerTitle: "Themes",
+          
         }}
-      />
+      >
+         {(props) => <Theme {...props} updateTheme={updateTheme} />}      
+
+      </Stack.Screen>
       <Stack.Screen name="Language" component={Language}
         options={{
           headerTitle: "Language",

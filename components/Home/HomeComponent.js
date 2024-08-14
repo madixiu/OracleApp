@@ -16,7 +16,6 @@ function HomeComponent({ navigation }) {
       <ProfileSection theme={theme} navigation={navigation}/>
       <SearchBar /> 
       <UpcomingEvents theme={theme}/>
-      {/* <Button style={{marginTop:10}} onPress={() => notificationRouter()}>notif screen</Button> */}
     </View>
    );
 }

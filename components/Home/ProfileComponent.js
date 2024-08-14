@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
   container:(theme) =>({
     flex: 1,
     backgroundColor: theme.colors.background,
+    marginBottom:80
   }),
   section: {
     paddingHorizontal: 20,
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
   }),
   itemText: {
     fontSize: 14,
+    // fontWeight:'bold'
   },
   divider:(theme) => ({
     height: 1,
