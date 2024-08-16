@@ -2,13 +2,14 @@ import { View, Image,Text, StyleSheet } from "react-native";
 import profilePicture from './../../assets/home/profilePicture.jpg'
 import { IconButton, Badge } from 'react-native-paper';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { t } from "i18next";
 export default function ProfileSection({theme,navigation}) {
   return ( 
     <View style={{flexDirection:'row',justifyContent:'space-between', alignItems:'center',marginTop:20,marginHorizontal:10}}>
       <TouchableOpacity style={styles.profilePictureView} onPress={() => navigation.navigate('ProfileComponent')}>
         <Image style={styles.profilePicture(theme)} source={profilePicture} />
         <View style={{marginStart:5}}>
-          <Text style={styles.greeting(theme)}>{`Good ${getTimeOfDay()},`}</Text>
+          <Text style={styles.greeting(theme)}>{greeting()}</Text>
           <Text style={styles.name(theme)}>Allisa</Text>
         </View>
       </TouchableOpacity>
@@ -32,18 +33,18 @@ export default function ProfileSection({theme,navigation}) {
 }
 
 
-function getTimeOfDay() {
+function greeting() {
   const now = new Date();
   const hour = now.getHours();
 
   if (hour >= 5 && hour < 12) {
-      return "morning";
+      return t("Greetings.Morning");
   } else if (hour >= 12 && hour < 17) {
-      return "afternoon";
+      return t("Greetings.Afternoon");
   } else if (hour >= 17 && hour < 21) {
-      return "evening";
+      return t("Greetings.Evening");
   } else {
-      return "night";
+      return t("Greetings.Night");
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-
+import { t } from 'i18next';
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -13,7 +13,7 @@ export default function SearchBar() {
         
         style={styles.searchBar}
         inputStyle={styles.input}
-        placeholder="Search"
+        placeholder={t("SearchPlaceholder")}
         onChangeText={setSearchQuery}
         value={searchQuery}
       />

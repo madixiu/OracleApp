@@ -1,0 +1,23 @@
+{
+  "upcomingEvents" : "événements à venir",
+  "Greetings" : {
+    "Morning" : "Bonjour",
+    "Afternoon" : "Bon après-midi",
+    "Evening" : "Bonsoir",
+    "Night" : "Bonne nuit"
+  },
+  "SearchPlaceholder" : "Recherche",
+  "EventsFilter": {
+    "Today": "Aujourd'hui", 
+    "ThisWeek": "Cette Semaine",
+    "NextWeek": "La Semaine Prochaine",
+    "ThisMonth": "Ce Mois-ci",
+    "All": "Tous"
+  },
+  "BottomTabLabel": {
+    "Home": "Accueil",
+    "Calendar": "Calendrier",
+    "Goals": "Objectifs",
+    "Social": "Social"
+  }
+}

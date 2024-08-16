@@ -4,9 +4,7 @@ import { PaperProvider, MD3LightTheme, adaptNavigationTheme, } from 'react-nativ
 import Main from './Main';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LightColors } from './misc/ColorThemes';
-import { Alert } from 'react-native';
-
-
+import i18n from './misc/i18n';
 
 const { LightTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,

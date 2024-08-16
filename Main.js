@@ -10,6 +10,7 @@ import Calendar from './pages/Calendar';
 import Social from './pages/Social';
 import Placeholder from './pages/Placeholder';
 import { useTheme } from 'react-native-paper';
+import { t } from 'i18next';
 const Tab = createBottomTabNavigator();
 // Disable RTL layout
 I18nManager.forceRTL(false);
@@ -67,8 +68,9 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) 
         screenOptions={screenOptions}
       >
       <Tab.Screen name="Home" 
+      
       // component={Home}
-      isteners={({navigation, route}) => ({
+      listeners={({navigation, route}) => ({
           tabPress: (e) => {
             e.preventDefault();
             if (navigation.isFocused()) {
@@ -90,7 +92,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) 
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
               <MaterialCommunityIcons name="home" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} />
-              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>Home</Text>
+              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>{t('BottomTabLabel.Home')}</Text>
             </View>
           ),
         }}
@@ -112,7 +114,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) 
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
               <MaterialCommunityIcons name="calendar" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} />
-              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>Calendar</Text>
+              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>{t('BottomTabLabel.Calendar')}</Text>
             </View>
           ),
         }}
@@ -138,7 +140,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) 
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
               <MaterialCommunityIcons name="book" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} />
-              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>Goals</Text>
+              <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>{t('BottomTabLabel.Goals')}</Text>
             </View>
           ),
         }}
@@ -156,7 +158,7 @@ function BottomTabs({theme ,isTabBarExpanded, setIsTabBarExpanded,updateTheme}) 
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tab]}>
                 <MaterialCommunityIcons name="account-group" color={focused ? theme.colors.primary : theme.colors.secondary} size={24} style={{mb:1}}/>
-                <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>Social</Text>
+                <Text style={{color: focused ? theme.colors.primary : theme.colors.secondary}}>{t('BottomTabLabel.Social')}</Text>
             </View>
           ),
         }}

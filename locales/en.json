@@ -1,0 +1,23 @@
+{
+  "upcomingEvents" : "Upcoming Events",
+  "Greetings" : {
+    "Morning" : "Good morning",
+    "Afternoon" : "Good afternoon",
+    "Evening" : "Good evening",
+    "Night" : "Good night"
+  },
+  "SearchPlaceholder" : "Search",
+  "EventsFilter": {
+    "Today":"Today", 
+    "ThisWeek":"This Week",
+    "NextWeek":"Next Week",
+    "ThisMonth":"This Month",
+    "All" : "All"
+  },
+  "BottomTabLabel": {
+    "Home": "Home",
+    "Calendar": "Calendar",
+    "Goals": "Goals",
+    "Social": "Social"
+  }
+}

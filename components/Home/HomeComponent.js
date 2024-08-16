@@ -4,18 +4,17 @@ import CustomButton from './CustomButton';
 import CustomCard from './CustomCard';
 import ProfileSection from './ProfileSection';
 import SearchBar from './SearchBar';
+import { useTranslation } from 'react-i18next';
 function HomeComponent({ navigation }) {
   const theme = useTheme();
-  // const notificationRouter = () => {
-  //   navigation.navigate('NotificationComponent')
-  //   return;
-  // };
+  const { t } = useTranslation();
+
 
   return ( 
     <View style={styles.container(theme)}>
       <ProfileSection theme={theme} navigation={navigation}/>
       <SearchBar /> 
-      <UpcomingEvents theme={theme}/>
+      <UpcomingEvents theme={theme} t={t}/>
     </View>
    );
 }
@@ -23,23 +22,23 @@ function HomeComponent({ navigation }) {
 const buttonList = [
   {
     id: 1,
-    title: 'Today',
+    title: 'EventsFilter.Today',
   },
   {
     id: 2,
-    title: 'This Week',
+    title: 'EventsFilter.ThisWeek',
   },
   {
     id: 3,
-    title: 'Next Week',
+    title: 'EventsFilter.NextWeek',
   },
   {
     id: 4,
-    title: 'This Month',
+    title: 'EventsFilter.ThisMonth',
   },
   {
     id: 5,
-    title: 'All',
+    title: 'EventsFilter.All',
   },
 ];
 
@@ -82,11 +81,11 @@ const events = [
 ];
 
 
-function UpcomingEvents({theme}) {
+function UpcomingEvents({theme,t}) {
   return(
   <View>
     <View style={{marginVertical:10,marginHorizontal:15}}>
-      <Text variant="headlineMedium" style={styles.title(theme)}>Upcoming Events</Text>
+      <Text variant="headlineMedium" style={styles.title(theme)}>{t('upcomingEvents')}</Text>
     </View>
     <View style={{flexDirection:'row', justifyContent:'space-between',marginHorizontal:10}}>
       <FlatList
@@ -95,8 +94,8 @@ function UpcomingEvents({theme}) {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
         <CustomButton 
-          title={item.title}
-          onPress={() => console.log(item.title)}
+          title={t(item.title)}
+          onPress={() => console.log(t(item.title))}
         />
         )}
         showsHorizontalScrollIndicator={false}
